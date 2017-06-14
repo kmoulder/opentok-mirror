@@ -31,10 +31,10 @@ class ClientMirror extends React.Component {
     axios.get(`${baseUrl}/client-mirror/${mirrorId}`)
       .then((response) => {
         this.setState({
-          sdk: response.data.sdk,
-          html: response.data.html,
-          javascript: response.data.javascript,
-          css: response.data.css
+          sdk: response.data.sdk || jsSdkVersions[0].value,
+          html: response.data.html || '',
+          javascript: response.data.javascript || '',
+          css: response.data.css || ''
         });
       });
   }

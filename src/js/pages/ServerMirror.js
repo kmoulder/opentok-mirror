@@ -27,8 +27,8 @@ class ServerMirror extends React.Component {
     axios.get(`${baseUrl}/server-mirror/${mirrorId}`)
       .then((response) => {
         this.setState({
-          template: response.data.template,
-          json: response.data.json
+          template: response.data.template || Object.keys(apiRequestTemplates)[0],
+          json: response.data.json || ''
         });
       });
   }
