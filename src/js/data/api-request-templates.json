@@ -10,31 +10,6 @@
       "p2p.preference": "disabled"
     }
   },
-  "Connection - Test Network": {
-    "method": "GET",
-    "url": "https://api.opentok.com/v2/project/<API_KEY>/session/<SESSION_ID>/connection/<CONNECTION_ID>",
-    "headers": {
-      "X-OPENTOK-AUTH": "<JWT_TOKEN>"
-    }
-  },
-  "Connection - Send Signal": {
-    "method": "POST",
-    "url": "https://api.opentok.com/v2/project/<API_KEY>/session/<SESSION_ID>/connection/<CONNECTION_ID>/signal",
-    "headers": {
-      "X-OPENTOK-AUTH": "<JWT_TOKEN>"
-    },
-    "data" : {
-      "type" : "<Data_type>",
-      "data" : "<Sinal_Data>"
-    }
-  },
-  "Connection - Delete Signal": {
-    "method": "DELETE",
-    "url": "https://api.opentok.com/v2/project/<API_KEY>/session/<SESSION_ID>/connection/<CONNECTION_ID>",
-    "headers": {
-      "X-OPENTOK-AUTH": "<JWT_TOKEN>"
-    }
-  },
   "Archive - Start": {
   	"method": "POST",
     "url": "https://api.opentok.com/v2/project/<API_KEY>/archive",
@@ -112,6 +87,31 @@
       "X-OPENTOK-AUTH": "<JWT_TOKEN>"
     }
   },
+  "Connection - Test Network": {
+    "method": "GET",
+    "url": "https://api.opentok.com/v2/project/<API_KEY>/session/<SESSION_ID>/connection/<CONNECTION_ID>",
+    "headers": {
+      "X-OPENTOK-AUTH": "<JWT_TOKEN>"
+    }
+  },
+  "Connection - Send Signal": {
+    "method": "POST",
+    "url": "https://api.opentok.com/v2/project/<API_KEY>/session/<SESSION_ID>/connection/<CONNECTION_ID>/signal",
+    "headers": {
+      "X-OPENTOK-AUTH": "<JWT_TOKEN>"
+    },
+    "data" : {
+      "type" : "<DATA_TYPE>",
+      "data" : "<SIGNAL_DATA>"
+    }
+  },
+  "Connection - Delete Signal": {
+    "method": "DELETE",
+    "url": "https://api.opentok.com/v2/project/<API_KEY>/session/<SESSION_ID>/connection/<CONNECTION_ID>",
+    "headers": {
+      "X-OPENTOK-AUTH": "<JWT_TOKEN>"
+    }
+  },
   "SIP - Dial": {
   	"method": "POST",
     "url": "https://api.opentok.com/v2/project/<API_KEY>/dial",
@@ -133,20 +133,6 @@
   	    },
   	    "secure": true
   	  }
-    }
-  },
-  "Project - GET": {
-    "method": "GET",
-    "url": "https://api.opentok.com/v2/project/<API_KEY>/",
-    "headers": {
-      "X-OPENTOK-AUTH": "<JWT_TOKEN>"
-    }
-  },
-  "Project - Usage": {
-    "method": "GET",
-    "url": "https://api.opentok.com/v2/project/<API_KEY>/usage",
-    "headers": {
-      "X-OPENTOK-AUTH": "<JWT_TOKEN>"
     }
   }
 }
