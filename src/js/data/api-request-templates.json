@@ -3,16 +3,7 @@
   	"method": "POST",
     "url": "https://api.opentok.com/session/create",
     "headers": {
-      "X-OPENTOK-AUTH": "<JWT_TOKEN>"
-    },
-    "data": {
-      "p2p.preference": "disabled"
-    }
-  },
-  "Session - GET": {
-    "method": " GET",
-    "url": "https://api.opentok.com/session/",
-    "headers": {
+      "Content-Type": "application/x-www-form-urlencoded;",
       "X-OPENTOK-AUTH": "<JWT_TOKEN>"
     },
     "data": {
@@ -21,14 +12,14 @@
   },
   "Connection - Test Network": {
     "method": "GET",
-    "url": "https://api.opentok.com/v2/project/<API_KEY>/session/<SESSION_ID>/connection/<Connection_ID>",
+    "url": "https://api.opentok.com/v2/project/<API_KEY>/session/<SESSION_ID>/connection/<CONNECTION_ID>",
     "headers": {
       "X-OPENTOK-AUTH": "<JWT_TOKEN>"
     }
   },
   "Connection - Send Signal": {
     "method": "POST",
-    "url": "https://api.opentok.com/v2/project/<API_KEY>/session/<SESSION_ID>/connection/<Connection_ID>/signal",
+    "url": "https://api.opentok.com/v2/project/<API_KEY>/session/<SESSION_ID>/connection/<CONNECTION_ID>/signal",
     "headers": {
       "X-OPENTOK-AUTH": "<JWT_TOKEN>"
     },
@@ -39,7 +30,7 @@
   },
   "Connection - Delete Signal": {
     "method": "DELETE",
-    "url": "https://api.opentok.com/v2/project/<API_KEY>/session/<SESSION_ID>/connection/<Connection_ID>",
+    "url": "https://api.opentok.com/v2/project/<API_KEY>/session/<SESSION_ID>/connection/<CONNECTION_ID>",
     "headers": {
       "X-OPENTOK-AUTH": "<JWT_TOKEN>"
     }

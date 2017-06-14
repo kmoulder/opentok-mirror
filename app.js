@@ -83,9 +83,6 @@ app.get('/jwt-token', (req, res) => {
 
 app.post('/sendAnvilRequest', (req, res) => {
   const jsonObj = JSON.parse(req.body.jsonObj);
-  if (!jsonObj.headers['Content-Type']) {
-    jsonObj.headers['Content-Type'] = 'application/x-www-form-urlencoded;';
-  }
   axios(jsonObj).then((response) => {
     res.send(response.data);
   }).catch((error) => {
