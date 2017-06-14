@@ -17,22 +17,45 @@ const getUniqueId = (prefix) => {
     .then(res => res === 0 ? id : getUniqueId(prefix));
   }
 
+const _getMirror = (id, prefix, dataFields) => {
+  return client.hmgetAsync(`${prefix}:${id}`, dataFields)
+    .then((res) => _.zipObject(dataFields, res));
+}
+
+const _setMirror = (prefix, data) => {
+    let id;
+    return getUniqueId(prefix).then(uniqueId => {
+      id = uniqueId;
+      return client.hmsetAsync(`${prefix}:${id}`, data).then((err, res) => id);
+    });
+}
+
 module.exports = {
   getClientMirror: (id) => {
     const dataFields = ['sdk', 'javascript','html', 'css'];
-    return client.hmgetAsync(`${clientMirrorPrefix}:${id}`, dataFields)
-      .then((res) => _.zipObject(dataFields, res));
+    return _getMirror(id, clientMirrorPrefix, dataFields);
+  },
+
+  getServerMirror: (id) => {
+    const dataFields = ['template', 'json'];
+    return _getMirror(id, serverMirrorPrefix, dataFields);
   },
 
   setClientMirror: (data) => {
-    let id;
-    return getUniqueId(clientMirrorPrefix).then(uniqueId => {
-      id = uniqueId;
-      return client.hmsetAsync(`${clientMirrorPrefix}:${id}`,
+    const redisFields = [
         'sdk', data.sdk,
         'javascript', data.javascript,
         'css', data.css,
-        'html', data.html).then((err, res) => id);
-      });
-  }
+        'html', data.html
+    ];
+    return _setMirror(clientMirrorPrefix, redisFields)
+  },
+
+  setServerMirror: (data) => {
+    const redisFields = [
+      'template', data.template,
+      'json', data.json
+    ]
+    return _setMirror(serverMirrorPrefix, redisFields);
+    }
 }

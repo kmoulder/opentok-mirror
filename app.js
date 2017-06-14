@@ -41,6 +41,18 @@ app.post('/client-mirror', (req, res) => {
       .then((mirrorId) => res.send(mirrorId));
 });
 
+app.get('/server-mirror/:mirrorId', (req, res) => {
+  redis.getServerMirror(req.params.mirrorId)
+  .then((data) => {
+    res.send(JSON.stringify(data));
+  });
+});
+
+app.post('/server-mirror', (req, res) => {
+    redis.setServerMirror(req.body)
+      .then((mirrorId) => res.send(mirrorId));
+});
+
 app.get('/session', (req, res) => {
   opentok.createSession((err, session) => {
     if (err) {

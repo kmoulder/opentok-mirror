@@ -7,8 +7,8 @@ const axios = require('axios');
 const apiRequestTemplates = require('../data/api-request-templates');
 
 class ServerMirror extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       template: Object.keys(apiRequestTemplates)[0],
       json: this.getJsonByTemplate(Object.keys(apiRequestTemplates)[0]),
@@ -16,6 +16,19 @@ class ServerMirror extends React.Component {
       isRunning: false,
       isSaving: false
     };
+    if (this.props.match.params.mirrorId) {
+      this.setSavedState(this.props.match.params.mirrorId);
+    }
+  }
+
+  setSavedState(mirrorId) {
+    axios.get(`${baseUrl}/server-mirror/${mirrorId}`)
+      .then((response) => {
+        this.setState({
+          template: response.data.template,
+          json: response.data.json
+        });
+      });
   }
 
   updateTemplate(newTemplate) {
@@ -55,6 +68,21 @@ class ServerMirror extends React.Component {
 
   save() {
     this.setState({ isSaving: true });
+    axios.post(`${baseUrl}/server-mirror`, {
+      template: this.state.template,
+      json: this.state.json})
+      .then((response) => {
+        this.props.history.push(`/server-mirror/${response.data}`);
+        this.setState({ isSaving: false });
+      });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.match.params.mirrorId !== nextProps.match.params.mirrorId) {
+      if (nextProps.match.params.mirrorId && !this.state.isSaving) {
+        this.setSavedState(nextProps.match.params.mirrorId);
+      }
+    }
   }
 
   render() {

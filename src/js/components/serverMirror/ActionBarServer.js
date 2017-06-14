@@ -32,7 +32,7 @@ class ActionBarServer extends React.Component {
     }
   }
 
-  generateAuthTokenClickHandler() {
+  generateAuthTokenClickHandler() {
     this.setState({ isLoadingAuthToken: true });
     axios.get(`${baseUrl}/jwt-token`)
       .then((res) => {
@@ -48,7 +48,7 @@ class ActionBarServer extends React.Component {
       <div className="action-bar">
         <div className="sdk-version">
           <span>API Request Template</span>
-          <select name="version" value={this.template} onChange={this.changeTemplateHandler.bind(this)}>
+          <select name="version" value={this.props.template} onChange={this.changeTemplateHandler.bind(this)}>
             {this.templateItems}
           </select>
         </div>
@@ -77,7 +77,8 @@ ActionBarServer.propTypes = {
   options: PropTypes.object,
   onTemplateChange: PropTypes.func,
   onRunClick: PropTypes.func,
-  onInfoGenerate: PropTypes.func
+  onInfoGenerate: PropTypes.func,
+  onSaveClick: PropTypes.func
 };
 
 export default ActionBarServer;

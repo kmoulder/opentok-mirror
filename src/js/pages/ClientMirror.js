@@ -64,6 +64,7 @@ class ClientMirror extends React.Component {
   }
 
   save() {
+    this.setState({ isSaving: true });
     axios.post(`${baseUrl}/client-mirror`, {
       sdk: this.state.sdk,
       javascript: this.state.javascript,
@@ -85,7 +86,7 @@ class ClientMirror extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.match.params.mirrorId !== nextProps.match.params.mirrorId) {
-      if (nextProps.match.params.mirrorId) {
+      if (nextProps.match.params.mirrorId && !this.state.isSaving) {
         this.setSavedState(nextProps.match.params.mirrorId);
       }
     }

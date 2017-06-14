@@ -32,7 +32,7 @@ class ActionBar extends React.Component {
     }
   }
 
-  generateSessionInfoClickHandler() {
+  generateSessionInfoClickHandler() {
     this.setState({ isLoadingSessionInfo: true });
     axios.get(`${baseUrl}/session`)
       .then((res) => {
@@ -77,7 +77,8 @@ ActionBar.propTypes = {
   options: PropTypes.object,
   onSdkChange: PropTypes.func,
   onRunClick: PropTypes.func,
-  onInfoGenerate: PropTypes.func
+  onInfoGenerate: PropTypes.func,
+  onSaveClick: PropTypes.func
 };
 
 export default ActionBar;
