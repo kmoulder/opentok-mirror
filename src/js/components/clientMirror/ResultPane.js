@@ -17,6 +17,9 @@ class ResultPane extends React.Component {
   }
 
   changeSdkHandler() {
+    if(!this.head) { 
+      return;
+    }
     const scriptOT = document.createElement('script');
     scriptOT.setAttribute('src',
       `https://static.opentok.com/v${this.props.sdkValue}/js/opentok.min.js`
