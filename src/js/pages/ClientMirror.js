@@ -12,17 +12,19 @@ class ClientMirror extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sdk: jsSdkVersions[0].value,
-      html: initialState.html,
-      javascript: initialState.javascript,
-      css: initialState.css,
       result: {},
       isRunning: false,
       isSaving: false
     };
-    if (this.props.match.params.mirrorId) {
-      this.setSavedState(this.props.match.params.mirrorId);
-    }
+  }
+
+  setInitialState() {
+    this.setState({
+      sdk: jsSdkVersions[0].value,
+      html: initialState.html,
+      javascript: initialState.javascript,
+      css: initialState.css,
+    });
   }
 
   setSavedState(mirrorId) {
@@ -35,6 +37,14 @@ class ClientMirror extends React.Component {
           css: response.data.css
         });
       });
+  }
+
+  componentDidMount() { 
+    if (this.props.match.params.mirrorId) {
+      this.setSavedState(this.props.match.params.mirrorId);
+    } else {
+      this.setInitialState();
+    }
   }
 
   updateSDK(newSdk) {
@@ -88,6 +98,8 @@ class ClientMirror extends React.Component {
     if (this.props.match.params.mirrorId !== nextProps.match.params.mirrorId) {
       if (nextProps.match.params.mirrorId && !this.state.isSaving) {
         this.setSavedState(nextProps.match.params.mirrorId);
+      } else if(!nextProps.match.params.mirrorId) {
+        this.setInitialState();
       }
     }
   }

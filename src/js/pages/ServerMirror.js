@@ -10,15 +10,17 @@ class ServerMirror extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      template: Object.keys(apiRequestTemplates)[0],
-      json: this.getJsonByTemplate(Object.keys(apiRequestTemplates)[0]),
       result: '',
       isRunning: false,
       isSaving: false
     };
-    if (this.props.match.params.mirrorId) {
-      this.setSavedState(this.props.match.params.mirrorId);
-    }
+  }
+
+  setInitialState() {
+    this.setState({
+      template: Object.keys(apiRequestTemplates)[0],
+      json: this.getJsonByTemplate(Object.keys(apiRequestTemplates)[0])
+    });
   }
 
   setSavedState(mirrorId) {
@@ -29,6 +31,14 @@ class ServerMirror extends React.Component {
           json: response.data.json
         });
       });
+  }
+
+  componentDidMount() { 
+    if (this.props.match.params.mirrorId) {
+      this.setSavedState(this.props.match.params.mirrorId);
+    } else {
+      this.setInitialState();
+    }
   }
 
   updateTemplate(newTemplate) {
@@ -81,6 +91,8 @@ class ServerMirror extends React.Component {
     if (this.props.match.params.mirrorId !== nextProps.match.params.mirrorId) {
       if (nextProps.match.params.mirrorId && !this.state.isSaving) {
         this.setSavedState(nextProps.match.params.mirrorId);
+      } else if(!nextProps.match.params.mirrorId) {
+        this.setInitialState();
       }
     }
   }
