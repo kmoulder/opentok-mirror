@@ -32,6 +32,7 @@
   },
   "scripts": {
     "build": "NODE_ENV=production webpack --config ./webpack.config.js --progress --colors",
-    "start": "node app"
+    "start": "node app",
+    "postinstall": "NODE_ENV=production webpack --config ./webpack.config.js"
   }
 }
