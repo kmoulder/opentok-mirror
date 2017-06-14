@@ -17,7 +17,7 @@ class ResultPane extends React.Component {
   }
 
   changeSdkHandler() {
-    if(!this.head) { 
+    if(!this.head || !this.props.sdkValue) { 
       return;
     }
     const scriptOT = document.createElement('script');
