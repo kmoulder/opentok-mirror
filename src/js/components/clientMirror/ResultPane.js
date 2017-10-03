@@ -40,7 +40,7 @@ class ResultPane extends React.Component {
     } else {
       this.body = this.frame.contentDocument.body;
     }
-
+    
     this.html = document.createElement('div');
     this.html.innerHTML = this.props.result.html;
 
@@ -48,11 +48,15 @@ class ResultPane extends React.Component {
     this.style.innerHTML = this.props.result.css;
     
     this.script = document.createElement('script');
-    this.script.innerHTML = this.props.result.javascript;
+    this.script.innerHTML = this.destroyOTSessionsScript().concat(this.props.result.javascript);
     
     this.body.appendChild(this.html);
     this.body.appendChild(this.style);
     this.body.appendChild(this.script);
+  }
+
+  destroyOTSessionsScript() {
+    return `OT.sessions.forEach((session) => { session.destroy(); });`;
   }
 
   isTbPluginObject(node) {
